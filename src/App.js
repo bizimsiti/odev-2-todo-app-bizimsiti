@@ -4,11 +4,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, todo: "Learn Javascript", completed: false },
-    { id: 2, todo: "Learn React", completed: false },
-    { id: 3, todo: "Have a life", completed: false },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState("initialState");
   const [situation, setSituation] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
@@ -26,9 +22,27 @@ function App() {
     }
   };
   useEffect(() => {
-    setTodo("");
+    getFromlocal();
+  }, []);
+  useEffect(() => {
     filterHandler();
+    saveTolocal();
+    setTodo("");
   }, [todos, situation]);
+  // (SAVE and LOAD) LOCALSTORAGE
+  const saveTolocal = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+  const getFromlocal = () => {
+    if (localStorage.getItem("todos") === null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let localTodos = JSON.parse(localStorage.getItem("todos"));
+      setTodos(localTodos);
+      console.log(localTodos);
+    }
+  };
+
   return (
     <>
       <div className="todoapp">
