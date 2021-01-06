@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 function App() {
   const [todos, setTodos] = useState([]);
-  const [todo, setTodo] = useState("initialState");
+  const [todo, setTodo] = useState("");
   const [situation, setSituation] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
   const filterHandler = () => {
