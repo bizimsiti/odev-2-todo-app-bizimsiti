@@ -1,6 +1,13 @@
 import TodoItem from "./TodoItem";
 import MainFooter from "./MainFooter";
-function Main({ todos, setTodos, situation, setSituation, filteredTodos }) {
+function Main({
+  todos,
+  setTodos,
+  situation,
+  setSituation,
+  filteredTodos,
+  setFilteredTodos,
+}) {
   const markCompleted = () => {
     // check todo completed field
     setTodos(
@@ -45,6 +52,7 @@ function Main({ todos, setTodos, situation, setSituation, filteredTodos }) {
           situation={situation}
           setSituation={setSituation}
           filteredTodos={filteredTodos}
+          setFilteredTodos={setFilteredTodos}
         />
       </>
     </div>

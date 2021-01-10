@@ -6,6 +6,7 @@ function MainFooter({
   setSituation,
   filteredTodos,
   situation,
+  setFilteredTodos,
 }) {
   // handle all-active-completed tasks
   const handleSituation = (e) => {
@@ -17,6 +18,7 @@ function MainFooter({
     const list = todos.filter((todo) => todo.completed !== true);
     setTodos(list);
   };
+
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -28,7 +30,7 @@ function MainFooter({
         <li>
           <a
             id="all"
-            href="#"
+            href="/#"
             onClick={handleSituation}
             className={situation === "All" ? "selected" : null}
           >
@@ -38,7 +40,7 @@ function MainFooter({
         <li>
           <a
             id="active"
-            href="#"
+            href="/#"
             onClick={handleSituation}
             className={situation === "Active" ? "selected" : null}
           >
@@ -48,7 +50,7 @@ function MainFooter({
         <li>
           <a
             id="completed"
-            href="#"
+            href="/#"
             onClick={handleSituation}
             className={situation === "Completed" ? "selected" : null}
           >

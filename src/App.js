@@ -8,31 +8,33 @@ function App() {
   const [todo, setTodo] = useState("");
   const [situation, setSituation] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
-  const filterHandler = () => {
-    switch (situation) {
-      case "Completed":
-        setFilteredTodos(todos.filter((todo) => todo.completed === true));
-        break;
-      case "Active":
-        setFilteredTodos(todos.filter((todo) => todo.completed === false));
-        break;
-      default:
-        setFilteredTodos(todos);
-        break;
-    }
-  };
+
   useEffect(() => {
     getFromlocal();
   }, []);
   useEffect(() => {
-    filterHandler();
+    const saveTolocal = () => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    };
+    const filteredHandler = () => {
+      switch (situation) {
+        case "Completed":
+          setFilteredTodos(todos.filter((todo) => todo.completed === true));
+          break;
+        case "Active":
+          setFilteredTodos(todos.filter((todo) => todo.completed === false));
+          break;
+        default:
+          setFilteredTodos(todos);
+          break;
+      }
+    };
+    filteredHandler();
     saveTolocal();
     setTodo("");
   }, [todos, situation]);
+
   // (SAVE and LOAD) LOCALSTORAGE
-  const saveTolocal = () => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  };
   const getFromlocal = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));
@@ -58,6 +60,7 @@ function App() {
           situation={situation}
           setSituation={setSituation}
           filteredTodos={filteredTodos}
+          setFilteredTodos={setFilteredTodos}
         />
       </div>
       <Footer />
